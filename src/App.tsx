@@ -1,46 +1,51 @@
-import { Suspense } from 'react';
+import { Suspense, lazy } from 'react';
 import './App.css';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Loading from './views/pages/common/Loading';
-// import { useResponsiveLogger } from "./utils/useResponsiveLogger";
+import { useAuth } from './contexts/AuthContext';
 
-// Layouts
+// 로그인 관련
 import LoginLayout from './views/layouts/LoginLayout';
-import LobbyLayout from './views/layouts/LobbyLayout';
-// import WaitingRoomLayout from '../src/layouts/WaitingRoomLayout';
-// import PlayRoomLayout from '../src/layouts/PlayRoomLayout';
-
-// Pages
 import Login from './views/pages/auth/LoginPage';
-import TestPage from './views/pages/common/TestPage';
-// import RoomList from './pages/RoomList';
-// import WaitingRoom from './pages/WaitingRoom';
-// import useAuthCheck from "./hooks/useAuthCheck.tsx";
-// import UserProfileEditor from "./pages/UserProfileEditor.tsx";
+
+// 로그인 후 페이지
+const LobbyLayout = lazy(() => import('./views/layouts/LobbyLayout'));
+const TestPage = lazy(() => import('./views/pages/common/TestPage'));
 
 
 function App() {
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  // 로그인 안됨 → 로그인 라우트만 제공
+  if (!user) {
+    return (
+      <Routes>
+        <Route element={<LoginLayout />}>
+          <Route path="/login" element={<Login />} />
+          {/* <Route path="/signup" element={<Signup />} /> */}
+        </Route>
+        <Route path="*" element={<Navigate to="/login" replace />} />
+      </Routes>
+    );
+  }
+
+  // 로그인됨 → 메인 라우트 제공
   return (
-      <Suspense fallback={<Loading />}>
-        <Routes>
-          {/* 로그인 레이아웃 */}
-          <Route element={<LoginLayout />}>
-            <Route path="/login" element={<Login />} />
-            {/* <Route path="/signup" element={<Signup />} /> */}
-          </Route>
-
-          {/* 로비/기본 레이아웃 */}
-          <Route element={<LobbyLayout />}>
-            <Route path="/TestPage" element={<TestPage/>} />
-            {/* <Route path="/" element={<RoomList />} /> */}
-          </Route>
-
-          {/* 기본 경로 → 로그인으로 리다이렉트 */}
-          <Route path="/" element={<Navigate to="/login" />} />
-          {/* 없는 페이지 리다이렉트 */}
-          <Route path="*" element={<Navigate to="/login" />} />
-        </Routes>
-      </Suspense>
+    <Suspense fallback={<Loading />}>
+      <Routes>
+        <Route element={<LobbyLayout />}>
+          <Route path="/TestPage" element={<TestPage />} />
+          <Route path="/" element={<Navigate to="/TestPage" replace />} />
+          {/* <Route path="/" element={<RoomList />} /> */}
+        </Route>
+        <Route path="/login" element={<Navigate to="/" replace />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Suspense>
   );
 }
 
