@@ -19,11 +19,11 @@ export default function LoginLayout() {
       <main
         style={{
           width: '100%',
-          maxWidth: '500px',
-          padding: '40px',
-          backgroundColor: 'rgba(0, 0, 0, 0.7)',
-          borderRadius: '16px',
-          boxShadow: '0 0 20px rgba(0,0,0,0.6)',
+          maxWidth: '380px',
+          padding: '30px',
+          backgroundColor: 'rgba(0, 0, 0, 0.4)',
+          backdropFilter: 'blur(10px)',
+          borderRadius: '12px',
           color: '#fff',
         }}
       >
