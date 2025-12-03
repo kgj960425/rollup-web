@@ -1,19 +1,19 @@
 import { Outlet } from 'react-router-dom';
+import loginBg from '../../assets/loginLayout.png';
 
 export default function LoginLayout() {
   return (
     <div
       style={{
-        width: '100%',
-        minHeight: '100vh',
+        width: '100vw',
+        height: '100vh',
         overflow: 'hidden',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundImage: `url('/assets/images/cazino_table.jpg')`,
+        backgroundImage: `url(${loginBg})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        backgroundAttachment: 'fixed',
       }}
     >
       <main

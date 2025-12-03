@@ -7,7 +7,7 @@ import {
   onAuthStateChanged,
   updateProfile,
 } from 'firebase/auth';
-import { auth, googleProvider } from '../services/firebase';
+import { auth, googleProvider } from '../firebase/firebase';
 import { firebaseUserToUser } from '../types/common';
 import type { User, AuthContextType } from '../types/common';
 
