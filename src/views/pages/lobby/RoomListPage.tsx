@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { db } from '../../../services/firebase';
+import { db } from '../../../firebase/firebase';
 import { useAuth } from '../../../contexts/AuthContext';
 import { useRooms } from '../../../hooks/useRooms';
 import type { Room, GameType } from '../../../types/common';

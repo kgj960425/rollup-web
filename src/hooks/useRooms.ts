@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { collection, query, where, onSnapshot, orderBy } from 'firebase/firestore';
-import { db } from '../services/firebase';
+import { db } from '../firebase/firebase';
 import type { Room } from '../types/common';
 
 interface UseRoomsOptions {
