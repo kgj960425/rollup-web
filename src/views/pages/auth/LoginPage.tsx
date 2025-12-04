@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../contexts/AuthContext';
 import './LoginPage.css';
 
@@ -9,8 +9,89 @@ const LoginPage = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const { signInWithEmail, signInWithGoogle } = useAuth();
+  // 회원가입 모달 상태
+  const [showRegister, setShowRegister] = useState(false);
+  const [registerEmail, setRegisterEmail] = useState('');
+  const [registerPassword, setRegisterPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [nickname, setNickname] = useState('');
+  const [registerError, setRegisterError] = useState('');
+  const [registerLoading, setRegisterLoading] = useState(false);
+
+  // 비밀번호 찾기 모달 상태
+  const [showResetPassword, setShowResetPassword] = useState(false);
+  const [resetEmail, setResetEmail] = useState('');
+  const [resetError, setResetError] = useState('');
+  const [resetSuccess, setResetSuccess] = useState(false);
+  const [resetLoading, setResetLoading] = useState(false);
+
+  const { signInWithEmail, signInWithGoogle, signUpWithEmail, resetPassword } = useAuth();
   const navigate = useNavigate();
+
+  const handleResetPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setResetError('');
+    setResetSuccess(false);
+    setResetLoading(true);
+
+    try {
+      await resetPassword(resetEmail);
+      setResetSuccess(true);
+    } catch (err) {
+      setResetError('비밀번호 재설정 이메일 전송에 실패했습니다. 이메일을 확인해주세요.');
+      console.error(err);
+    } finally {
+      setResetLoading(false);
+    }
+  };
+
+  const openResetPasswordModal = () => {
+    setResetEmail('');
+    setResetError('');
+    setResetSuccess(false);
+    setShowResetPassword(true);
+  };
+
+  const handleRegister = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setRegisterError('');
+
+    if (registerPassword !== confirmPassword) {
+      setRegisterError('비밀번호가 일치하지 않습니다.');
+      return;
+    }
+
+    if (registerPassword.length < 6) {
+      setRegisterError('비밀번호는 6자 이상이어야 합니다.');
+      return;
+    }
+
+    if (nickname.length < 2) {
+      setRegisterError('닉네임은 2자 이상이어야 합니다.');
+      return;
+    }
+
+    setRegisterLoading(true);
+
+    try {
+      await signUpWithEmail(registerEmail, registerPassword, nickname);
+      navigate('/');
+    } catch (err) {
+      setRegisterError('회원가입에 실패했습니다. 다시 시도해주세요.');
+      console.error(err);
+    } finally {
+      setRegisterLoading(false);
+    }
+  };
+
+  const openRegisterModal = () => {
+    setRegisterEmail('');
+    setRegisterPassword('');
+    setConfirmPassword('');
+    setNickname('');
+    setRegisterError('');
+    setShowRegister(true);
+  };
 
   const handleEmailLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -116,10 +197,125 @@ const LoginPage = () => {
           Google로 로그인
         </button>
 
-        <div className="register-link">
-          계정이 없으신가요? <Link to="/register">회원가입</Link>
+        <div className="auth-links">
+          <button type="button" className="link-button" onClick={openResetPasswordModal}>비밀번호 찾기</button>
+          <span className="link-divider">|</span>
+          <button type="button" className="link-button" onClick={openRegisterModal}>회원가입</button>
         </div>
       </div>
+
+      {/* 회원가입 모달 */}
+      {showRegister && (
+        <div className="modal-overlay" onClick={() => setShowRegister(false)}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h3>회원가입</h3>
+              <button className="modal-close" onClick={() => setShowRegister(false)}>×</button>
+            </div>
+
+            {registerError && <div className="error-message">{registerError}</div>}
+
+            <form onSubmit={handleRegister} className="login-form">
+              <div className="form-group">
+                <input
+                  type="text"
+                  value={nickname}
+                  onChange={(e) => setNickname(e.target.value)}
+                  placeholder="닉네임 (2자 이상)"
+                  required
+                  disabled={registerLoading}
+                />
+              </div>
+
+              <div className="form-group">
+                <input
+                  type="email"
+                  value={registerEmail}
+                  onChange={(e) => setRegisterEmail(e.target.value)}
+                  placeholder="이메일"
+                  required
+                  disabled={registerLoading}
+                />
+              </div>
+
+              <div className="form-group">
+                <input
+                  type="password"
+                  value={registerPassword}
+                  onChange={(e) => setRegisterPassword(e.target.value)}
+                  placeholder="비밀번호 (6자 이상)"
+                  required
+                  disabled={registerLoading}
+                />
+              </div>
+
+              <div className="form-group">
+                <input
+                  type="password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  placeholder="비밀번호 확인"
+                  required
+                  disabled={registerLoading}
+                />
+              </div>
+
+              <button type="submit" className="btn btn-primary" disabled={registerLoading}>
+                {registerLoading ? '가입 중...' : '회원가입'}
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* 비밀번호 찾기 모달 */}
+      {showResetPassword && (
+        <div className="modal-overlay" onClick={() => setShowResetPassword(false)}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h3>비밀번호 찾기</h3>
+              <button className="modal-close" onClick={() => setShowResetPassword(false)}>×</button>
+            </div>
+
+            {resetError && <div className="error-message">{resetError}</div>}
+            {resetSuccess && (
+              <div className="success-message">
+                비밀번호 재설정 이메일을 전송했습니다. 이메일을 확인해주세요.
+              </div>
+            )}
+
+            {!resetSuccess ? (
+              <form onSubmit={handleResetPassword} className="login-form">
+                <p className="modal-description">
+                  가입한 이메일 주소를 입력하면 비밀번호 재설정 링크를 보내드립니다.
+                </p>
+                <div className="form-group">
+                  <input
+                    type="email"
+                    value={resetEmail}
+                    onChange={(e) => setResetEmail(e.target.value)}
+                    placeholder="이메일"
+                    required
+                    disabled={resetLoading}
+                  />
+                </div>
+
+                <button type="submit" className="btn btn-primary" disabled={resetLoading}>
+                  {resetLoading ? '전송 중...' : '이메일 전송'}
+                </button>
+              </form>
+            ) : (
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => setShowResetPassword(false)}
+              >
+                확인
+              </button>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

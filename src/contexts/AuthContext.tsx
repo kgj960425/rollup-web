@@ -6,6 +6,7 @@ import {
   signOut as firebaseSignOut,
   onAuthStateChanged,
   updateProfile,
+  sendPasswordResetEmail,
 } from 'firebase/auth';
 import { auth, googleProvider } from '../firebase/firebase';
 import { firebaseUserToUser } from '../types/common';
@@ -61,6 +62,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     await firebaseSignOut(auth);
   };
 
+  const resetPassword = async (email: string) => {
+    await sendPasswordResetEmail(auth, email);
+  };
+
   const value: AuthContextType = {
     user,
     loading,
@@ -68,6 +73,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     signInWithEmail,
     signUpWithEmail,
     signOut,
+    resetPassword,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
