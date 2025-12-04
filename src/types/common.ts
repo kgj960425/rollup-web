@@ -19,11 +19,16 @@ export interface AuthContextType {
 
 export interface Room {
   id: string;
-  gameType: string;
+  title: string;           // 방 제목
+  gameType: string;        // 게임 종류
   hostId: string;
   hostNickname: string;
-  maxPlayers: number;
+  currentPlayers: number;  // 현재 인원
+  maxPlayers: number;      // 최대 인원
   status: 'waiting' | 'playing' | 'finished';
+  timeLimit: number;       // 시간 제한 (분 단위, 0이면 무제한)
+  isSpecial: boolean;      // 특수 방 여부
+  specialType?: string;    // 특수 유형 (예: '랭크', '친선', '토너먼트' 등)
   createdAt: Date;
   players: Player[];
 }

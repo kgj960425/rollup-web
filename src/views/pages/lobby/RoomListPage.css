@@ -10,110 +10,40 @@
   padding: 2rem;
 }
 
-/* 게임 탭 */
-.game-tabs {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 2rem;
-  overflow-x: auto;
-  padding-bottom: 0.5rem;
-}
-
-.game-tab {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.25rem;
-  padding: 1rem 1.5rem;
-  background: #fff;
-  border: 1px solid #e0e0e0;
-  border-radius: 12px;
-  color: #666;
-  cursor: pointer;
-  transition: all 0.2s;
-  white-space: nowrap;
-}
-
-.game-tab:hover:not(.disabled) {
-  background: #fafafa;
-  border-color: #ccc;
-  color: #333;
-}
-
-.game-tab.active {
-  background: #f97316;
-  border-color: #f97316;
-  color: #fff;
-}
-
-.game-tab.disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.game-tab-name {
-  font-weight: 600;
-}
-
-.coming-soon {
-  font-size: 0.7rem;
-  color: #f59e0b;
-}
-
-.game-tab.active .coming-soon {
-  color: rgba(255, 255, 255, 0.8);
-}
-
-/* 게임 정보 바 */
-.game-info-bar {
+/* 헤더 */
+.room-list-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem;
-  background: #fff;
-  border-radius: 12px;
-  margin-bottom: 2rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  margin-bottom: 1.5rem;
 }
 
-.game-description h2 {
+.room-list-header h2 {
+  margin: 0;
   color: #333;
-  margin: 0 0 0.5rem 0;
-  font-size: 1.25rem;
-}
-
-.game-description p {
-  color: #666;
-  margin: 0 0 0.5rem 0;
-}
-
-.player-count {
-  color: #f97316;
-  font-size: 0.875rem;
-  font-weight: 500;
+  font-size: 1.5rem;
 }
 
 .btn-create {
-  padding: 0.875rem 1.5rem;
+  padding: 0.75rem 1.5rem;
   font-size: 1rem;
 }
 
-/* 방 섹션 */
-.rooms-section h3 {
-  color: #333;
-  margin: 0 0 1rem 0;
-  font-size: 1.125rem;
+/* 테이블 래퍼 */
+.room-table-wrapper {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
 }
 
+/* 상태 메시지 */
 .loading-state,
 .error-state,
 .empty-state {
   text-align: center;
   padding: 3rem;
   color: #888;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .error-state {
@@ -124,84 +54,96 @@
   margin: 0.25rem 0;
 }
 
-/* 방 그리드 */
-.room-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1rem;
+/* 방 테이블 */
+.room-table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-.room-card {
-  background: #fff;
-  border: 1px solid #e0e0e0;
-  border-radius: 12px;
-  padding: 1.25rem;
-  transition: all 0.2s;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+.room-table thead {
+  background: #f8f9fa;
+  border-bottom: 1px solid #e0e0e0;
 }
 
-.room-card:hover {
-  border-color: #ccc;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+.room-table th {
+  padding: 1rem;
+  text-align: left;
+  color: #666;
+  font-weight: 600;
+  font-size: 0.875rem;
+  white-space: nowrap;
 }
 
-.room-card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
+.room-table tbody tr {
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  transition: background 0.15s;
 }
 
-.room-host {
+.room-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.room-table tbody tr:hover {
+  background: #fafafa;
+}
+
+.room-table tbody tr.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.room-table tbody tr.disabled:hover {
+  background: transparent;
+}
+
+.room-table td {
+  padding: 1rem;
   color: #333;
+  font-size: 0.9rem;
+}
+
+.room-table .room-title {
+  font-weight: 500;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 상태 뱃지 */
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
   font-weight: 600;
 }
 
-.room-status {
-  background: #22c55e;
-  color: #fff;
+.status-waiting {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.status-playing {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.status-finished {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+/* 특수 뱃지 */
+.special-badge {
+  display: inline-block;
   padding: 0.25rem 0.5rem;
+  background: #fef3c7;
+  color: #d97706;
   border-radius: 4px;
   font-size: 0.75rem;
-  font-weight: 500;
-}
-
-.room-card-body {
-  margin-bottom: 1rem;
-}
-
-.room-players {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: #666;
-}
-
-.player-icon {
-  font-size: 1rem;
-}
-
-.btn-join {
-  width: 100%;
-  padding: 0.75rem;
-  background: #f97316;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
   font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.btn-join:hover:not(:disabled) {
-  background: #ea580c;
-}
-
-.btn-join:disabled {
-  background: #ccc;
-  color: #888;
-  cursor: not-allowed;
 }
 
 /* 모달 */
@@ -223,7 +165,7 @@
   background: #fff;
   border-radius: 16px;
   width: 100%;
-  max-width: 400px;
+  max-width: 420px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
 }
 
@@ -273,7 +215,7 @@
   font-size: 0.9rem;
 }
 
-.modal-body input,
+.modal-body input[type="text"],
 .modal-body select {
   width: 100%;
   padding: 0.75rem;
@@ -284,18 +226,33 @@
   font-size: 1rem;
 }
 
-.modal-body input:focus,
+.modal-body input[type="text"]:focus,
 .modal-body select:focus {
   outline: none;
   border-color: #f97316;
 }
 
-.modal-body input:disabled {
-  opacity: 0.7;
-  background: #f0f0f0;
+.modal-body select {
+  cursor: pointer;
 }
 
-.modal-body select {
+/* 체크박스 그룹 */
+.checkbox-group {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  margin-bottom: 0;
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
   cursor: pointer;
 }
 
@@ -348,13 +305,25 @@
     padding: 1rem;
   }
 
-  .game-info-bar {
+  .room-list-header {
     flex-direction: column;
     gap: 1rem;
+    align-items: stretch;
+  }
+
+  .room-list-header h2 {
     text-align: center;
   }
 
   .btn-create {
     width: 100%;
+  }
+
+  .room-table-wrapper {
+    overflow-x: auto;
+  }
+
+  .room-table {
+    min-width: 600px;
   }
 }
