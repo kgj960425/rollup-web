@@ -1,0 +1,128 @@
+.waiting-room {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.waiting-room-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.waiting-room-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.waiting-room-header h2 {
+  margin: 0;
+  color: #fff;
+  font-size: 1.25rem;
+}
+
+.room-id {
+  color: #888;
+  font-size: 0.875rem;
+}
+
+.waiting-room-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding: 1.5rem;
+}
+
+.players-section h3,
+.game-settings h3 {
+  color: #f97316;
+  margin: 0 0 1rem 0;
+  font-size: 1rem;
+}
+
+.player-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.player-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+
+.player-avatar {
+  font-size: 1.5rem;
+}
+
+.player-name {
+  color: #fff;
+  flex: 1;
+}
+
+.player-badge {
+  background: #f97316;
+  color: #fff;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.game-settings p {
+  color: #ccc;
+  margin: 0.5rem 0;
+}
+
+.waiting-room-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ccc;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+.btn-primary {
+  background: #f97316;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #ea580c;
+}
+
+@media (max-width: 768px) {
+  .waiting-room-body {
+    grid-template-columns: 1fr;
+  }
+}

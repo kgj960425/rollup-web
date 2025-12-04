@@ -1,0 +1,28 @@
+.gameroom-layout {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+.gameroom-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 1.5rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.gameroom-title {
+  color: #f97316;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.gameroom-main {
+  flex: 1;
+  display: flex;
+  padding: 2rem;
+}

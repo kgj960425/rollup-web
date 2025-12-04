@@ -63,6 +63,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   };
 
   const resetPassword = async (email: string) => {
+    // Firebase 기본 비밀번호 재설정 이메일 전송
     await sendPasswordResetEmail(auth, email);
   };
 

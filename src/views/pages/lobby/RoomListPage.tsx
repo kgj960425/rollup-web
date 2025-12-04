@@ -44,7 +44,7 @@ const RoomListPage = () => {
   const [maxPlayers, setMaxPlayers] = useState(4);
   const [creating, setCreating] = useState(false);
 
-  const { user, signOut } = useAuth();
+  const { user } = useAuth();
   const { rooms, loading, error } = useRooms({ gameType: selectedGame });
   const navigate = useNavigate();
 
@@ -87,28 +87,8 @@ const RoomListPage = () => {
     navigate(`/room/${room.id}`);
   };
 
-  const handleLogout = async () => {
-    await signOut();
-    navigate('/login');
-  };
-
   return (
     <div className="room-list-container">
-      {/* 헤더 */}
-      <header className="room-list-header">
-        <div className="header-left">
-          <h1>🎲 보드게임 플랫폼</h1>
-        </div>
-        <div className="header-right">
-          <div className="user-info">
-            <span className="user-name">{user?.displayName || user?.email}</span>
-          </div>
-          <button className="btn btn-outline" onClick={handleLogout}>
-            로그아웃
-          </button>
-        </div>
-      </header>
-
       <div className="room-list-content">
         {/* 게임 선택 탭 */}
         <div className="game-tabs">
