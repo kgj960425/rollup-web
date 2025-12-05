@@ -20,13 +20,13 @@ const Navbar = () => {
 
     return (
         <header className="navbar-header">
-            <div className="navbar-logo">로비</div>
-
             <nav className="navbar-left">
+                <NavLink to="/roomlist">로비</NavLink>
                 <NavLink to="/notice">공지</NavLink>
                 <NavLink to="/stats">통계</NavLink>
                 <NavLink to="/shop">아이템샵</NavLink>
                 <NavLink to="/help">도움말</NavLink>
+                <NavLink to="/testpage">테스트페이지</NavLink>
             </nav>
 
             <div className="navbar-right">

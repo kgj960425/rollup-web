@@ -15,7 +15,7 @@ const GamingLayout = lazy(() => import('./views/layouts/GamingLayout'));
 
 // 로비 페이지들
 const RoomListPage = lazy(() => import('./views/pages/lobby/RoomListPage'));
-
+const TestPage = lazy(() => import('./views/pages/common/TestPage'));
 // 대기실 페이지들
 const WaitingRoomPage = lazy(() => import('./views/pages/room/WaitingRoomPage'));
 
@@ -53,6 +53,7 @@ function App() {
           <Route path="/stats" element={<div>통계 페이지 (준비중)</div>} />
           <Route path="/shop" element={<div>아이템샵 페이지 (준비중)</div>} />
           <Route path="/help" element={<div>도움말 페이지 (준비중)</div>} />
+          <Route path="/testpage" element={<TestPage />} />
         </Route>
 
         {/* 대기실 레이아웃 - 방 입장 후 게임 시작 전 */}
