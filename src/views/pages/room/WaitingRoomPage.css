@@ -1,7 +1,8 @@
 .waiting-room {
   width: 100%;
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
+  padding: 1rem;
 }
 
 .waiting-room-card {
@@ -29,6 +30,7 @@
 .room-id {
   color: #888;
   font-size: 0.875rem;
+  font-family: monospace;
 }
 
 .waiting-room-body {
@@ -58,6 +60,15 @@
   padding: 0.75rem;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.player-item.host {
+  border-left: 3px solid #f97316;
+}
+
+.player-item.ready {
+  border-left: 3px solid #22c55e;
 }
 
 .player-avatar {
@@ -70,12 +81,40 @@
 }
 
 .player-badge {
-  background: #f97316;
-  color: #fff;
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
   font-size: 0.75rem;
   font-weight: 600;
+}
+
+.host-badge {
+  background: #f97316;
+  color: #fff;
+}
+
+.ready-badge {
+  background: #22c55e;
+  color: #fff;
+}
+
+.offline-badge {
+  background: #6b7280;
+  color: #fff;
+}
+
+.btn-kick {
+  background: transparent;
+  border: none;
+  color: #ef4444;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.btn-kick:hover {
+  background: rgba(239, 68, 68, 0.2);
 }
 
 .game-settings p {
@@ -101,13 +140,18 @@
   transition: all 0.2s;
 }
 
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .btn-secondary {
   background: rgba(255, 255, 255, 0.1);
   color: #ccc;
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.btn-secondary:hover {
+.btn-secondary:hover:not(:disabled) {
   background: rgba(255, 255, 255, 0.15);
   color: #fff;
 }
@@ -117,8 +161,37 @@
   color: #fff;
 }
 
-.btn-primary:hover {
+.btn-primary:hover:not(:disabled) {
   background: #ea580c;
+}
+
+.btn-success {
+  background: #22c55e;
+  color: #fff;
+}
+
+.btn-success:hover:not(:disabled) {
+  background: #16a34a;
+}
+
+.btn-warning {
+  background: #eab308;
+  color: #000;
+}
+
+.btn-warning:hover:not(:disabled) {
+  background: #ca8a04;
+}
+
+.loading-state,
+.error-state {
+  text-align: center;
+  padding: 3rem;
+  color: #ccc;
+}
+
+.error-state {
+  color: #ef4444;
 }
 
 @media (max-width: 768px) {
