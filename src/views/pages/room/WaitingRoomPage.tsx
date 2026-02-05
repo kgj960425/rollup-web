@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../contexts/AuthContext';
 import { useRoom } from '../../../hooks/useRoom';
+import ChatBox from '../../../components/chat/ChatBox';
 import './WaitingRoomPage.css';
 
 // 게임 종류 목록
@@ -174,6 +175,14 @@ const WaitingRoomPage = () => {
             <p>최대 인원: {room.maxPlayers}명</p>
             {room.timeLimit > 0 && <p>시간 제한: {room.timeLimit}분</p>}
             {room.isSpecial && <p>특수 방: {room.specialType}</p>}
+          </div>
+
+          <div className="chat-section">
+            <ChatBox
+              roomId={roomId || ''}
+              userId={user?.uid || ''}
+              userNickname={user?.displayName || '익명'}
+            />
           </div>
         </div>
 

@@ -1,6 +1,6 @@
 .waiting-room {
   width: 100%;
-  max-width: 900px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 1rem;
 }
@@ -35,9 +35,10 @@
 
 .waiting-room-body {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+  grid-template-columns: 1fr 0.8fr 1.2fr;
+  gap: 1.5rem;
   padding: 1.5rem;
+  min-height: 400px;
 }
 
 .players-section h3,
@@ -194,8 +195,55 @@
   color: #ef4444;
 }
 
+/* 채팅 섹션 */
+.chat-section {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.chat-section h3 {
+  color: #f97316;
+  margin: 0 0 1rem 0;
+  font-size: 1rem;
+}
+
+/* 태블릿 (1024px 이하) */
+@media (max-width: 1024px) {
+  .waiting-room {
+    max-width: 100%;
+  }
+
+  .waiting-room-body {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+  }
+
+  .chat-section {
+    grid-column: 1 / -1;
+    height: 300px;
+  }
+}
+
+/* 모바일 (768px 이하) */
 @media (max-width: 768px) {
   .waiting-room-body {
     grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .chat-section {
+    grid-column: 1;
+    height: 280px;
+  }
+
+  .waiting-room-footer {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .btn {
+    flex: 1;
+    min-width: 120px;
   }
 }

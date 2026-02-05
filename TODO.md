@@ -2,92 +2,92 @@
 
 ## 📋 전체 진행률 추적
 
-**현재 Phase:** Phase 0 (설정)  
-**진행률:** 0% (0/100)
+**현재 Phase:** Phase 2 (게임 코어)  
+**진행률:** 35% (Phase 1 완료 + Phase 2 로비/채팅 진행중)
 
 ---
 
 ## Phase 0: 초기 설정 (완료 필수)
 
 ### 환경 설정
-- [ ] `npm install` 실행
-- [ ] `.env` 파일 생성 및 Firebase 키 입력
-- [ ] `npm run dev` 실행 확인
-- [ ] Firebase 프로젝트 생성
-- [ ] Firebase Authentication 활성화
-- [ ] Firestore Database 생성
+- [x] `npm install` 실행
+- [x] `.env` 파일 생성 및 Firebase 키 입력
+- [x] `npm run dev` 실행 확인
+- [x] Firebase 프로젝트 생성
+- [x] Firebase Authentication 활성화
+- [x] Firestore Database 생성
 - [ ] Supabase 프로젝트 생성 (백엔드 연동용)
 
 ---
 
-## Phase 1: 기본 인프라 (1-2주)
+## Phase 1: 기본 인프라 (1-2주) ✅
 
 ### 🔥 Firebase 설정
-- [ ] `src/core/firebase/config.ts` 생성
-- [ ] `src/core/firebase/auth.ts` 생성
-- [ ] `src/core/firebase/firestore.ts` 생성
-- [ ] Firebase 연결 테스트
+- [x] `src/core/firebase/config.ts` 생성
+- [x] `src/core/firebase/auth.ts` 생성
+- [x] `src/core/firebase/firestore.ts` 생성
+- [x] Firebase 연결 테스트
 
 ### 🌐 API 클라이언트
-- [ ] `src/core/api/client.ts` 생성
-- [ ] Axios 인터셉터 설정 (JWT 자동 추가)
+- [x] `src/core/api/client.ts` 생성
+- [x] Axios 인터셉터 설정 (JWT 자동 추가)
 
 ### 📦 상태 관리 (Zustand)
-- [ ] `src/store/authStore.ts` 생성
-- [ ] `src/store/uiStore.ts` 생성
-- [ ] `src/store/gameStore.ts` 생성
+- [x] `src/store/authStore.ts` 생성
+- [x] `src/store/uiStore.ts` 생성
+- [x] `src/store/gameStore.ts` 생성
 - [ ] `src/store/notificationStore.ts` 생성
 
 ### 🎣 커스텀 훅
-- [ ] `src/hooks/useAuth.ts` 생성
-- [ ] onAuthStateChanged 연동
+- [x] `src/hooks/useAuth.ts` 생성
+- [x] onAuthStateChanged 연동
 
 ### 🎨 공통 컴포넌트
-- [ ] `src/components/common/Button.tsx` 생성
-- [ ] `src/components/common/Loading.tsx` 생성
-- [ ] `src/components/common/Modal.tsx` 생성
-- [ ] `src/components/common/Navbar.tsx` 생성
+- [x] `src/components/common/Button.tsx` 생성
+- [x] `src/components/common/Loading.tsx` 생성
+- [x] `src/components/common/Modal.tsx` 생성
+- [x] `src/components/common/Navbar.tsx` 생성
 - [ ] `src/components/common/ErrorBoundary.tsx` 생성
 
 ### 📐 레이아웃
-- [ ] `src/layouts/LoginLayout.tsx` 생성
-- [ ] `src/layouts/CommunityLayout.tsx` 생성
+- [x] `src/layouts/LoginLayout.tsx` 생성
+- [x] `src/layouts/CommunityLayout.tsx` 생성
 
 ### 📄 페이지
-- [ ] `src/pages/auth/LoginPage.tsx` 생성
-- [ ] `src/pages/community/LandingPage.tsx` 생성
+- [x] `src/pages/auth/LoginPage.tsx` 생성
+- [x] `src/pages/community/LandingPage.tsx` 생성
 
 ### 🛣️ 라우팅
-- [ ] `src/router/index.tsx` 전체 라우트 설정
-- [ ] 로그인 → 커뮤니티 플로우 테스트
+- [x] `src/router/index.tsx` 전체 라우트 설정
+- [x] 로그인 → 커뮤니티 플로우 테스트
 
 ### ✅ Phase 1 완료 확인
-- [ ] 게스트 로그인 가능
-- [ ] Google 로그인 가능
-- [ ] 커뮤니티 랜딩 페이지 표시
-- [ ] 네비게이션 바 동작
+- [x] 게스트 로그인 가능
+- [x] Google 로그인 가능
+- [x] 커뮤니티 랜딩 페이지 표시
+- [x] 네비게이션 바 동작
 
 ---
 
 ## Phase 2: 게임 코어 (2-3주)
 
 ### 🏠 로비 시스템
-- [ ] `src/layouts/LobbyLayout.tsx` 생성
-- [ ] `src/pages/game/GameSelectPage.tsx` 생성
-- [ ] `src/pages/game/GameListPage.tsx` 생성
-- [ ] `src/pages/game/LobbyPage.tsx` 생성
-- [ ] `src/hooks/useLobby.ts` 생성
-- [ ] `src/components/lobby/PlayerList.tsx` 생성
+- [x] `src/layouts/LobbyLayout.tsx` 생성
+- [x] `src/pages/game/GameSelectPage.tsx` 생성
+- [x] `src/pages/game/GameListPage.tsx` 생성
+- [x] `src/pages/game/LobbyPage.tsx` 생성
+- [x] `src/hooks/useLobby.ts` (useRoom.ts로 구현)
+- [x] `src/components/lobby/PlayerList.tsx` (WaitingRoomPage 내 구현)
 - [ ] `src/components/lobby/PlayerCard.tsx` 생성
 - [ ] `src/components/lobby/GameSettings.tsx` 생성
-- [ ] `src/components/lobby/ReadyButton.tsx` 생성
+- [x] `src/components/lobby/ReadyButton.tsx` (WaitingRoomPage 내 구현)
 
 ### 💬 채팅 시스템
-- [ ] `src/hooks/useChat.ts` 생성
-- [ ] `src/components/chat/ChatBox.tsx` 생성
-- [ ] `src/components/chat/ChatMessage.tsx` 생성
-- [ ] `src/components/chat/ChatInput.tsx` 생성
-- [ ] Firestore 실시간 구독 연동
+- [x] `src/hooks/useChat.ts` 생성
+- [x] `src/components/chat/ChatBox.tsx` 생성
+- [x] `src/components/chat/ChatMessage.tsx` (ChatBox 내 구현)
+- [x] `src/components/chat/ChatInput.tsx` (ChatBox 내 구현)
+- [x] Firestore 실시간 구독 연동
 
 ### 🎮 게임 플레이 (오목 우선)
 - [ ] `src/layouts/GameLayout.tsx` 생성
