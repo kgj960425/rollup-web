@@ -19,8 +19,8 @@ const TestPage = lazy(() => import('./views/pages/common/TestPage'));
 // 대기실 페이지들
 const WaitingRoomPage = lazy(() => import('./views/pages/room/WaitingRoomPage'));
 
-// 게임 페이지들 (추후 게임별로 분리)
-// const YachtGame = lazy(() => import('./views/pages/game/YachtGame'));
+// 게임 페이지들
+const YachtGamePage = lazy(() => import('./views/pages/game/YachtGamePage'));
 
 
 function App() {
@@ -63,9 +63,7 @@ function App() {
 
         {/* 게임 레이아웃 - 게임 진행 중 */}
         <Route element={<GamingLayout />}>
-          <Route path="/game/:roomId" element={<div>게임 화면 (준비중)</div>} />
-          {/* 추후 게임별 라우트 추가 */}
-          {/* <Route path="/game/:roomId/yacht" element={<YachtGame />} /> */}
+          <Route path="/game/:roomId" element={<YachtGamePage />} />
         </Route>
 
         {/* 로그인 페이지 접근 시 홈으로 리다이렉트 */}
