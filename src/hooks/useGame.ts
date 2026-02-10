@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
-import { doc, onSnapshot, updateDoc, collection, query, orderBy, limit, addDoc, serverTimestamp_as_timestamp, serverTimestamp } from 'firebase/firestore';
-import { db } from '../core/firebase/config';
+import { doc, onSnapshot, updateDoc } from 'firebase/firestore';
+import { db } from '../firebase/firebase';
 
 // 야추 게임 점수 카테고리
 export type YachtCategory =
